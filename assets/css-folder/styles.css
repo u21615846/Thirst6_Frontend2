@@ -1,4 +1,9 @@
 /* Colors */
+html, body {
+    height: 100%;
+    margin: 0;
+  }
+  
 .bg-primary {
     background-color: #22577A;
 }
