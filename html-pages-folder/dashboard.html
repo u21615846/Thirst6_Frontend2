@@ -3,6 +3,7 @@
     <head>
         <title>Dashboard</title>
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
     <body class="container flex flex-col items-center">
         <main>
@@ -19,46 +20,58 @@
                 <div>
                     <!--Stats-->
                     <div class="container flex flex-col items-center gap-4 mx-auto my- 32">
-                        <div class="grid w-full grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-y-8 gap-4 mt-4" >
-                            <!--STATS DIV-->
-                            <div class="flex flex-col items-center">
-                                <h3 class="text-2xl font-extrabold leading-tight text-center text-dark-grey-900"><span id="countto1" countto="250">250</span> litres</h3>
-                                <p class="text-base font-medium leading-7 text-center text-dark-grey-600">Overall Water Usage</p>
-                            </div>
-                            <div class="flex flex-col items-center">
-                                <h3 class="text-2xl font-extrabold leading-tight text-center text-dark-grey-900"><span id="countto2" countto="12">12</span></h3>
-                                <p class="text-base font-medium leading-7 text-center text-dark-grey-600">Active Water Reserves</p>
-                            </div>
-                            <div class="flex flex-col items-center">
-                                <h3 class="text-2xl font-extrabold leading-tight text-center text-dark-grey-900"><span id="countto3" countto="2800">2800</span> litres</h3>
-                                <p class="text-base font-medium leading-7 text-center text-dark-grey-600">Water Saved</p>
-                            </div>
-                            <div class="flex flex-col items-center">
-                                <h3 class="text-2xl font-extrabold leading-tight text-center text-dark-grey-900"><span id="countto4" countto="18000">18000</span></h3>
-                                <p class="text-base font-medium leading-7 text-center text-dark-grey-600">Active Users</p>
-                            </div>
+                        <div class="grid w-full grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-y-8 gap-6 mt-4" >
+                            <!-- STATS DIV -->
+                                <div class="flex flex-col items-center">
+                                    <h3 class="text-2xl font-extrabold leading-tight text-center text-dark-grey-900">
+                                        <span id="countto1" countto="250">0</span> litres
+                                    </h3>
+                                    <p class="text-base font-medium leading-7 text-center text-dark-grey-600">Overall Water Usage</p>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <h3 class="text-2xl font-extrabold leading-tight text-center text-dark-grey-900">
+                                        <span id="countto2" countto="12">0</span>
+                                    </h3>
+                                    <p class="text-base font-medium leading-7 text-center text-dark-grey-600">Active Water Reserves</p>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <h3 class="text-2xl font-extrabold leading-tight text-center text-dark-grey-900">
+                                        <span id="countto3" countto="2800">0</span> litres
+                                    </h3>
+                                    <p class="text-base font-medium leading-7 text-center text-dark-grey-600">Water Saved</p>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <h3 class="text-2xl font-extrabold leading-tight text-center text-dark-grey-900">
+                                        <span id="countto4" countto="18000">0</span>
+                                    </h3>
+                                    <p class="text-base font-medium leading-7 text-center text-dark-grey-600">Active Users</p>
+                                </div>
+                            </div>    
                         </div>
                    </div>
                     <!--Graphs-->
                     <div class="container mx-auto mt-4 flex flex-col justify-center items-center">
                         <div class="grid grid-cols-1  md:grid-cols-2 gap-10">
                             <!--CARD 1-->
-                            <div class="flex flex-col items-center w-80 h-80 gap-6 px-6 py-5 rounded-3xl shadow-main hover:bg-red-900 transition duration-300 group">
+                            <div class="flex flex-col items-center gap-6 px-6 py-5 shadow-main transition duration-300 group">
                                 <!--HEADER DIV-->
                                 <div class="flex flex-col gap-2 text-center px-6">
                                     <h4 class="text-2xl font-extrabold text-dark-grey-900">Graph1 heading</h4>
                                     <div>
-                                        <p class="font-medium text-grey-700 group-hover:text-white">Actual Graph</p>
+                                        <!-- Graph 1 Canvas -->
+                                        <canvas id="chart1" width="400" height="200"></canvas>
                                     </div>
                                 </div>
                             </div>
+                            
                             <!--CARD 2-->
-                            <div class="flex flex-col items-center w-80 h-80 gap-6 px-6 py-5 rounded-3xl shadow-main hover:bg-red-900 transition duration-300 group">
+                            <div class="flex flex-col items-center gap-6 px-6 py-5 shadow-main transition duration-300 group">
                                 <!--HEADER DIV-->
                                 <div class="flex flex-col gap-2 text-center px-6">
                                     <h4 class="text-2xl font-extrabold text-dark-grey-900">Graph2 heading</h4>
                                     <div>
-                                        <p class="font-medium text-grey-700 group-hover:text-white">Actual Graph</p>
+                                        <!-- Graph 2 Canvas -->
+                                        <canvas id="chart2" width="400" height="200"></canvas>
                                     </div>
                                 </div>
                             </div>
@@ -75,7 +88,7 @@
                             </p>
                         </div>
                         <div class=" flex items-center justify-end">
-                            <img class="w-60 h-auto" src="" alt="gariep dam - south africa">
+                            <img class="w-60 h-auto" src="images/gariep-dam.jpg" alt="gariep dam - south africa">
                         </div>
                     </section>
                     <!--Summary-->
@@ -86,7 +99,92 @@
                 </div>
             </section>
         </main>
-        <footer>
-        </footer>
+        <!--Graph script-->
+        <script>
+            // Data and configuration for the first chart
+            const ctx1 = document.getElementById('chart1').getContext('2d');
+            const chart1 = new Chart(ctx1, {
+                type: 'line', // You can change this to 'bar', 'pie', etc.
+                data: {
+                    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                    datasets: [{
+                        label: 'Dataset 1',
+                        data: [65, 59, 80, 81, 56, 55],
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2,
+                        fill: false
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+          
+            // Data and configuration for the second chart
+            const ctx2 = document.getElementById('chart2').getContext('2d');
+            const chart2 = new Chart(ctx2, {
+                type: 'bar', // You can change this to 'line', 'pie', etc.
+                data: {
+                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                    datasets: [{
+                        label: 'Dataset 2',
+                        data: [12, 19, 3, 5, 2, 3],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+        <!--Counting animation script-->
+        <script>
+            function animateCountUp(element, start = 0, end, duration = 2000) {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    element.textContent = Math.floor(progress * (end - start) + start);
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+          
+            document.addEventListener('DOMContentLoaded', () => {
+                // Apply the animation to each stat element
+                const stats = document.querySelectorAll('[id^="countto"]');
+                stats.forEach(stat => {
+                    const endValue = parseInt(stat.getAttribute('countto'), 10);
+                    animateCountUp(stat, 0, endValue, 2000);
+                });
+            });
+        </script>
+          
     </body>
 </html>
