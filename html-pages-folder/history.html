@@ -5,13 +5,133 @@
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     </head>
     <body>
-        <main>
-            <section>
-
+        <main class="flex flex-col justify-center items-center space-y-10 p-6">
+            <!-- Water Consumption History Section -->
+            <section class="w-full max-w-5xl p-6 shadow-md rounded-lg" style="background-color: #22577A;">
+                <h1 class="text-4xl font-bold mb-4 text-center text-white">Water Consumption History</h1>
+            </section>
+    
+            <!-- Historical Analytics Section -->
+            <section class="w-full max-w-5xl bg-white p-6 shadow-md rounded-lg">
+                <h1 class="text-4xl font-bold mb-6 text-center">Historical Analytics</h1>
+                <p class="text-lg mb-4 text-center">Detailed Consumption Analysis</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Total Water Usage -->
+                    <div>
+                        <p class="text-lg font-semibold">Total Water Usage</p>
+                        <canvas id="totalWaterUsageChart" width="400" height="200"></canvas>
+                    </div>
+    
+                    <!-- Distribution Efficiency -->
+                    <div>
+                        <p class="text-lg font-semibold">Distribution Efficiency</p>
+                        <canvas id="distributionEfficiencyChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+    
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <!-- Sustainability Metrics -->
+                    <div>
+                        <p class="text-lg font-semibold">Water Supply Resilience</p>
+                        <canvas id="sustainabilityMetricsChart1" width="400" height="200"></canvas>
+                    </div>
+                    <div>
+                        <p class="text-lg font-semibold">Water Conservation Rate</p>
+                        <canvas id="sustainabilityMetricsChart2" width="400" height="200"></canvas>
+                    </div>
+                </div>
+    
+                <div class="mt-6">
+                    <!-- Peak Metrics -->
+                    <p class="text-lg font-semibold">Peak Water Usage</p>
+                    <canvas id="peakMetricsChart" width="400" height="200"></canvas>
+                </div>
+            </section>
+    
+            <!-- Report Issues or Provide Feedback Section -->
+            <section class="w-full max-w-5xl p-6 shadow-md rounded-lg text-white" style="background-color: #38A3A5">
+                <h1 class="text-4xl font-bold mb-6 text-center">Report Issues or Provide Feedback</h1>
+                <form action="/submit-feedback" method="post" class="space-y-4 text-white">
+                    <div>
+                        <label for="name" class="block text-sm font-medium ">Your Name (Optional):</label>
+                        <input type="text" id="name" name="name" placeholder="Your Name (Optional)"
+                            class="mt-1 block w-full text-black px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm">
+                    </div>
+    
+                    <div>
+                        <label for="email" class="block text-sm font-medium ">Your Email Address:</label>
+                        <input type="email" id="email" name="email" placeholder="Your Email Address" required
+                            class="mt-1 block w-full px-3 py-2 text-black border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm">
+                    </div>
+    
+                    <div>
+                        <label for="submission-type" class="block text-sm font-medium">Type of Submission:</label>
+                        <select id="submission-type" name="submission-type"
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white text-black rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm">
+                            <option value="concern">Concern</option>
+                            <option value="report">Report</option>
+                            <option value="feedback">Feedback</option>
+                        </select>
+                    </div>
+    
+                    <div>
+                        <label for="subject" class="block text-sm font-medium">Subject:</label>
+                        <input type="text" id="subject" name="subject" placeholder="Subject" required
+                            class="mt-1 block w-full px-3 py-2 text-black border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm">
+                    </div>
+    
+                    <div>
+                        <label for="message" class="block text-sm font-medium ">Message:</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Describe your concern, report, or feedback here..." required
+                            class="mt-1 block w-full px-3 py-2 text-black border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm"></textarea>
+                    </div>
+                    <div>
+                        <button type="submit"
+                            class="w-100 flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white" style="background-color: #22577A;">
+                            Submit
+                        </button>
+                    </div>
+                </form>
             </section>
         </main>
-        <footer>
-
-        </footer>
+        <!--Chart generator: Chart.js-->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <!--Javascript-->
+        <script>
+            // Simulating data
+            const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+            const simulatedData = labels.map(() => Math.floor(Math.random() * 100));
+        
+            // Chart configuration
+            const data = {
+                labels: labels,
+                datasets: [{
+                    label: 'Simulated Data',
+                    data: simulatedData,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            };
+        
+            const config = {
+                type: 'line', // or 'bar', 'pie', etc.
+                data: data,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            };
+        
+            // Render the chart
+            const myChart = new Chart(
+                document.getElementById('myChart'),
+                config
+            );
+        </script>
     </body>
 </html>
