@@ -6,11 +6,10 @@
     </head>
     <body class="container flex flex-col items-center justify-center">
         <main>
-            <section id="alerts">
+            <section id="alerts"class="my-4">
                 <div>
                     <h1 class="text-4xl font-bold my-4">Alerts</h1>
                     <!-- Alerts Grid -->
-                     
                     <div class="grid grid-cols-3 gap-6">
                         <!-- Alert 1 -->
                         <div id="alert1Container" class="flex flex-col items-center w-80 h-80 gap-6 px-6 py-5 shadow-main bg-red-900 transition duration-300" style="margin-left: 2.5em;">
@@ -37,7 +36,6 @@
                             <p id="alert3Message" class="text-white mt-4 font-bold"></p>
                         </div>
                     </div>
-
                     <!-- No Alerts Message -->
                     <div id="noAlertsMessage" class="text-center text-gray-600 p-4 hidden">
                         <p>No alerts</p>
@@ -67,7 +65,6 @@
             // Array of all possible alert types
             const alertTypes = ['red', 'orange', 'yellow'];
 
-            // Loop through each alert type and update the display based on the alerts parameter
             alertTypes.forEach(type => {
                 const container = document.getElementById(`alert${type === 'red' ? '1' : type === 'orange' ? '2' : '3'}Container`);
                 const messageElem = document.getElementById(`alert${type === 'red' ? '1' : type === 'orange' ? '2' : '3'}Message`);
