@@ -12,51 +12,56 @@
                     <h1 class="font-bold text-4xl my-4">Overview</h1>
                     <!--dropdown search menu where you can find the area you are looking for according to municipality, province or country-->
                     <div id="location-selector">
-                        <input type="dropdown" class="border-black mb-4">
-                    </div>
-                    <p class="text-sm">Top Insights</p>
+                        <select id="municipalityDropdown" class="mb-4 p-2" style="border: 3px solid #38A3A5">
+                          <option value="" disabled selected>Select Municipality</option>
+                          <option value="municipality1">Municipality 1</option>
+                          <option value="municipality2">Municipality 2</option>
+                          <option value="municipality3">Municipality 3</option>
+                        </select>
+                        <button id="searchButton" class="ml-2 text-white font-bold px-4 py-2" style="background-color: #38A3A5; border: 3px solid #38A3A5">Choose</button>
+                    </div>                      
+                    <p class="text-sm font-extrabold text-black">Here Are Your Top Insights</p>
                 </div>
                 <!--Container for insight graphs and stuff(should it have a grid?)-->
                 <div>
                     <!--Stats-->
-                    <div class="container flex flex-col items-center gap-4 mx-auto my- 32">
+                    <section class="container flex flex-col items-center gap-4 mx-auto my- 32">
                         <div class="grid w-full grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-y-8 gap-6 mt-4" >
                             <!-- STATS DIV -->
                                 <div class="flex flex-col items-center">
                                     <h3 class="text-2xl font-extrabold leading-tight text-center text-dark-grey-900">
-                                        <span id="countto1" countto="250">0</span> litres
+                                        <span id="countto1" countto="47500">0</span> litres
                                     </h3>
-                                    <p class="text-base font-medium leading-7 text-center text-dark-grey-600">Overall Water Usage</p>
+                                    <p class="text-base font-medium leading-7 text-center text-dark-grey-600">Overall Monthly Water Usage</p>
                                 </div>
                                 <div class="flex flex-col items-center">
                                     <h3 class="text-2xl font-extrabold leading-tight text-center text-dark-grey-900">
-                                        <span id="countto2" countto="12">0</span>
+                                        <span id="countto2" countto="7">0</span>
                                     </h3>
                                     <p class="text-base font-medium leading-7 text-center text-dark-grey-600">Active Water Reserves</p>
                                 </div>
                                 <div class="flex flex-col items-center">
                                     <h3 class="text-2xl font-extrabold leading-tight text-center text-dark-grey-900">
-                                        <span id="countto3" countto="2800">0</span> litres
+                                        <span id="countto3" countto="85000">0</span> kilolitres
                                     </h3>
                                     <p class="text-base font-medium leading-7 text-center text-dark-grey-600">Water Saved</p>
                                 </div>
                                 <div class="flex flex-col items-center">
                                     <h3 class="text-2xl font-extrabold leading-tight text-center text-dark-grey-900">
-                                        <span id="countto4" countto="18000">0</span>
+                                        <span id="countto4" countto="2250">0</span>
                                     </h3>
                                     <p class="text-base font-medium leading-7 text-center text-dark-grey-600">Active Users</p>
                                 </div>
                             </div>    
-                        </div>
-                   </div>
+                    </section>
                     <!--Graphs-->
-                    <div class="container mx-auto mt-4 flex flex-col justify-center items-center">
+                    <section class="container mx-auto mt-4 flex flex-col justify-center items-center">
                         <div class="grid grid-cols-1  md:grid-cols-2 gap-10">
                             <!--CARD 1-->
                             <div class="flex flex-col items-center gap-6 px-6 py-5 shadow-main transition duration-300 group">
                                 <!--HEADER DIV-->
                                 <div class="flex flex-col gap-2 text-center px-6">
-                                    <h4 class="text-2xl font-extrabold text-dark-grey-900">Graph1 heading</h4>
+                                    <h4 class="text-2xl font-bold text-dark-grey-900">Total Monthly Usage By Category</h4>
                                     <div>
                                         <!-- Graph 1 Canvas -->
                                         <canvas id="chart1" width="400" height="200"></canvas>
@@ -68,91 +73,118 @@
                             <div class="flex flex-col items-center gap-6 px-6 py-5 shadow-main transition duration-300 group">
                                 <!--HEADER DIV-->
                                 <div class="flex flex-col gap-2 text-center px-6">
-                                    <h4 class="text-2xl font-extrabold text-dark-grey-900">Graph2 heading</h4>
+                                    <h4 class="text-2xl font-bold text-dark-grey-900">Weekly Total Water Usage</h4>
                                     <div>
                                         <!-- Graph 2 Canvas -->
-                                        <canvas id="chart2" width="400" height="200"></canvas>
+                                        <canvas id="chart2" width="400" height="400"></canvas>
                                     </div>
                                 </div>
                             </div>
                         </div>    
-                    </div>
+                    </section>
                     <!--Words and Picture-->
-                    <section id="water-management-tips" class="grid grid-cols-2">
+                    <section id="water-management-tips" class="grid grid-cols-2 my-6">
                         <div class="flex flex-col justify-center w-100 text-center">
-                            <h1 class="text-2xl font-extrabold leading-tight text-black">
+                            <h1 class="text-2xl font-extrabold leading-tight text-black mb-4">
                                 Tips to Save!
                             </h1>
-                            <p class="mb-6 text-base font-normal leading-7 text-black">
-                                <!--Content will be generated by JS according to graph results-->
-                            </p>
+                            <div id="tipsContainer" class="justify-left">
+                                <!--Tips will be displayed over here-->
+                            </div>
                         </div>
                         <div class=" flex items-center justify-end">
                             <img class="w-60 h-auto" src="images/gariep-dam.jpg" alt="gariep dam - south africa">
                         </div>
                     </section>
                     <!--Summary-->
-                    <div>
-                        <h5 class="text-xl font-bold">Summary</h5>
-                        <p>Whatever we are summarising</p> <!--Use js to generate comments about this in connection to the graph-->
-                    </div>
+                    <section id="summary">
+                        <div>
+                            <h1 class="text-2xl font-bold mt-4">Performance Summary</h1>
+                            <div id="summaryContainer" class="p-4 text-white font-bold shadow-md my-6" style="background-color: #38A3A5;">
+                                <!-- Summary will be inserted here -->
+                            </div>
+                        </div>
+                    </section>                    
                 </div>
             </section>
         </main>
         <!--Graph script-->
         <script>
-            // Data and configuration for the first chart
+            // Data and configuration for the Pie Chart (Total Monthly Usage by Category)
             const ctx1 = document.getElementById('chart1').getContext('2d');
             const chart1 = new Chart(ctx1, {
-                type: 'line', // You can change this to 'bar', 'pie', etc.
+                type: 'pie',
                 data: {
-                    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                    labels: ['Residential Usage', 'Agricultural Usage', 'Commercial Usage', 'Public Services', 'Leakage/Unaccounted'],
                     datasets: [{
-                        label: 'Dataset 1',
-                        data: [65, 59, 80, 81, 56, 55],
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 2,
-                        fill: false
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-          
-            // Data and configuration for the second chart
-            const ctx2 = document.getElementById('chart2').getContext('2d');
-            const chart2 = new Chart(ctx2, {
-                type: 'bar', // You can change this to 'line', 'pie', etc.
-                data: {
-                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                    datasets: [{
-                        label: 'Dataset 2',
-                        data: [12, 19, 3, 5, 2, 3],
+                        data: [33250, 4750, 3545, 2375, 3580], // Corresponding data for each category
                         backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
                             'rgba(75, 192, 192, 0.2)',
                             'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 99, 132, 0.2)'
                         ],
                         borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
                             'rgba(75, 192, 192, 1)',
                             'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 99, 132, 1)'
                         ],
                         borderWidth: 1
                     }]
                 },
                 options: {
+                    responsive: true
+                }
+            });
+        
+            // Data and configuration for the Bar Chart (Weekly Total Water Usage by Category)
+            const ctx2 = document.getElementById('chart2').getContext('2d');
+            const chart2 = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                    datasets: [
+                        {
+                            label: 'Residential Usage',
+                            data: [8400, 8050, 8540, 8260],
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Agricultural Usage',
+                            data: [1200, 1150, 1220, 1180],
+                            backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                            borderColor: 'rgba(153, 102, 255, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Commercial Usage',
+                            data: [900, 850, 915, 880],
+                            backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                            borderColor: 'rgba(255, 206, 86, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Public Services',
+                            data: [600, 575, 610, 590],
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Leakage/Unaccounted',
+                            data: [900, 875, 915, 890],
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
                     scales: {
                         y: {
                             beginAtZero: true
@@ -160,10 +192,10 @@
                     }
                 }
             });
-        </script>
+        </script>        
         <!--Counting animation script-->
         <script>
-            function animateCountUp(element, start = 0, end, duration = 2000) {
+            function animateCountUp(element, start = 0, end, duration = 3000) {
                 let startTimestamp = null;
                 const step = (timestamp) => {
                     if (!startTimestamp) startTimestamp = timestamp;
@@ -185,6 +217,130 @@
                 });
             });
         </script>
-          
+        <!--Location selector script-->
+        <script>
+            document.getElementById('searchButton').addEventListener('click', function() {
+            const selectedMunicipality = document.getElementById('municipalityDropdown').value;
+            
+            if (selectedMunicipality) {
+                // Handle the search logic here, e.g., fetch data for the selected municipality
+                console.log(`Selected Municipality: ${selectedMunicipality}`);
+            } else {
+                alert('Please select a municipality.');
+            }
+            });
+        </script>
+        <!--Tips generator script-->
+        <script>
+            //thresholds for each category
+            const thresholds = {
+                residential: 30000,
+                agricultural: 4500,
+                commercial: 3500,
+                publicServices: 2500,
+                leakage: 3500
+                };
+
+            //actual usage for each category
+            const usage = {
+                residential: 33250,
+                agricultural: 4750,
+                commercial: 3545,
+                publicServices: 2375,
+                leakage: 3580
+                };
+
+            // Generate tips based on the usage and thresholds
+            function generateTips() {
+            const generatedTips = [];
+
+            if (usage.residential > thresholds.residential) {
+                generatedTips.push(`
+                    <p><strong>Residential Usage is above the recommended level.</strong></p>
+                    <ul>
+                        <li>Install low-flow showerheads and faucets.</li>
+                        <li>Fix leaky taps immediately to avoid water wastage.</li>
+                        <li>Water your garden early in the morning or late in the evening to reduce evaporation.</li>
+                    </ul>
+                `);
+            }
+
+            if (usage.agricultural > thresholds.agricultural) {
+                generatedTips.push(`
+                    <p><strong>Agricultural Usage is above the recommended level.</strong></p>
+                    <ul>
+                        <li>Consider using drip irrigation systems.</li>
+                        <li>Schedule irrigation according to the weather to avoid overwatering.</li>
+                        <li>Use mulching to retain soil moisture.</li>
+                    </ul>
+                `);
+            }
+
+            if (usage.commercial > thresholds.commercial) {
+                generatedTips.push(`
+                    <p><strong>Commercial Usage is above the recommended level.</strong></p>
+                    <ul>
+                        <li>Install water-saving devices in bathrooms and kitchens.</li>
+                        <li>Regularly check for leaks in plumbing systems.</li>
+                        <li>Educate employees about water conservation.</li>
+                    </ul>
+                `);
+            }
+
+            if (usage.publicServices > thresholds.publicServices) {
+                generatedTips.push(`
+                    <p><strong>Public Services Usage is above the recommended level.</strong></p>
+                    <ul>
+                        <li>Implement water-saving campaigns in public facilities.</li>
+                        <li>Regularly inspect and maintain public water infrastructure.</li>
+                        <li>Install water-efficient fixtures in government buildings.</li>
+                    </ul>
+                `);
+            }
+
+            if (usage.leakage > thresholds.leakage) {
+                generatedTips.push(`
+                    <p><strong>Leakage is above the recommended level.</strong></p>
+                    <ul>
+                        <li>Conduct regular inspections of water systems.</li>
+                        <li>Invest in smart water meters to detect leaks early.</li>
+                        <li>Fix leaks promptly to prevent water loss.</li>
+                    </ul>
+                `);
+            }
+                    document.getElementById('tipsContainer').innerHTML = generatedTips.join('');
+                }
+
+                //display the tips
+                generateTips();
+
+        </script>
+        <!--Summary generator script-->
+        <script>
+            // Function to generate summary based on total monthly usage
+            function generateSummary(totalMonthlyUsage, expectedLimit) {
+                let summary;
+                    
+                // Calculate percentage of usage
+                const usagePercentage = (totalMonthlyUsage / expectedLimit) * 100;
+                    
+                // Determine performance based on usage percentage
+                if (usagePercentage < 30) {
+                    summary = 'The municipality is performing excellently with water usage well below the expected limit. Keep up the great work!';
+                } else if (usagePercentage >= 30 && usagePercentage < 60) {
+                    summary = 'The municipality is performing well with water usage within a good range. Continue monitoring to maintain this performance.';
+                } else if (usagePercentage >= 60 && usagePercentage < 90) {
+                    summary = 'The municipality is performing average with water usage approaching the higher end of the limit. Consider implementing measures to reduce usage.';
+                } else {
+                    summary = 'The municipality is underperforming with water usage exceeding the expected limit. Immediate action is needed to address the high consumption.';
+                }
+                    document.getElementById('summaryContainer').textContent = summary;
+                }
+
+                const totalMonthlyUsage = 50000; 
+                const expectedLimit = 60000;    
+                generateSummary(totalMonthlyUsage, expectedLimit);
+
+        </script>
     </body>
 </html>
