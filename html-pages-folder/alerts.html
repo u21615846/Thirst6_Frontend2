@@ -8,55 +8,89 @@
         <main>
             <section id="alerts">
                 <div>
-                    <h1 class="text-4xl font-bold mt-4">Alerts</h1>
-                    <!--Alerts Grid-->
-                    <div class="grid grid-cols-3 gap-6 my-6">
-                        <!--ALERT 1-->
-                        <div class="flex flex-col items-center w-80 h-80 gap-6 px-6 py-5 shadow-main hover:bg-red-900 transition duration-300 group">
-                            <!--HEADER DIV-->
+                    <h1 class="text-4xl font-bold my-4">Alerts</h1>
+                    <!-- Alerts Grid -->
+                     
+                    <div class="grid grid-cols-3 gap-6">
+                        <!-- Alert 1 -->
+                        <div id="alert1Container" class="flex flex-col items-center w-80 h-80 gap-6 px-6 py-5 shadow-main bg-red-900 transition duration-300" style="margin-left: 2.5em;">
+                            <!-- Header -->
                             <div class="flex flex-col gap-2 text-center px-6">
-                                <h4 class="text-2xl font-extrabold text-dark-grey-900">No water</h4>
-                                <div>
-                                    <p class="font-medium text-grey-700 group-hover:text-white">Red alert</p>
-                                </div>
+                                <h4 class="text-2xl font-extrabold text-white">Red Alert</h4>
                             </div>
+                            <p id="alert1Message" class="text-white mt-4 font-bold"></p>
                         </div>
-                        <!--ALERT 2-->
-                        <div class="flex flex-col items-center w-80 h-80 gap-6 px-6 py-5 shadow-main hover:bg-yellow-600 transition duration-300 group">
-                            <!--HEADER DIV-->
+                        <!-- Alert 2 -->
+                        <div id="alert2Container" class="flex flex-col items-center w-80 h-80 gap-6 px-6 py-5 shadow-main bg-yellow-700 transition duration-300" style="margin-left: 2.5em;">
+                            <!-- Header -->
                             <div class="flex flex-col gap-2 text-center px-6">
-                                <h4 class="text-2xl font-extrabold text-dark-grey-900">Pipe Burst</h4>
-                                <div>
-                                    <p class="font-medium text-grey-700 group-hover:text-white">Orange alert</p>
-                                </div>
+                                <h4 class="text-2xl font-extrabold text-white">Orange Alert</h4>
                             </div>
+                            <p id="alert2Message" class="text-white mt-4 font-bold"></p>
                         </div>
-                        <!--ALERT 3-->
-                        <div class="flex flex-col items-center w-80 h-80 gap-6 px-6 py-5 shadow-main hover:bg-yellow-200 transition duration-300 group">
-                            <!--HEADER DIV-->
+                        <!-- Alert 3 -->
+                        <div id="alert3Container" class="flex flex-col items-center w-80 h-80 gap-6 px-6 py-5 shadow-main bg-yellow-300 transition duration-300" style="margin-left: 2.5em;">
+                            <!-- Header -->
                             <div class="flex flex-col gap-2 text-center px-6">
-                                <h4 class="text-2xl font-extrabold text-dark-grey-900">Leak</h4>
-                                <div>
-                                    <p class="font-medium text-grey-700 group-hover:text-white">Yellow alert</p>
-                                </div>
+                                <h4 class="text-2xl font-extrabold text-white">Yellow Alert</h4>
                             </div>
+                            <p id="alert3Message" class="text-white mt-4 font-bold"></p>
                         </div>
                     </div>
 
+                    <!-- No Alerts Message -->
+                    <div id="noAlertsMessage" class="text-center text-gray-600 p-4 hidden">
+                        <p>No alerts</p>
+                    </div>
                 </div>
             </section>
-            <section id="community-articles">
+            <section id="community-articles" class="my-4">
                 <div>
                     <h1 class="text-4xl font-bold mb-4">My Community</h1>
                     <div id="newsCanvas" class="border p-4  bg-gray-50 shadow-md w-40% h-auto" style="background-color: #22577A;">
+                        <h1 class="text-2xl font-bold mb-4 text-white">Water Crisis in South Africa</h1>
+                        <p class="w-40% text-white">South Africa is currently facing a significant water crisis. The situation has been exacerbated by climate change, population growth, and poor management of water resources.</p>
                         <!-- News articles will be embedded here -->
-                        <iframe src="https://www.greenpeace.org/africa/en/blogs/51757/water-crisis-in-south-africa/" width="100%" height="600" style="border: none; padding: 1em;"></iframe>
-                    </div>                    
+                         <a href="https://www.greenpeace.org/africa/en/blogs/51757/water-crisis-in-south-africa/" target="_blank" class="text-white font-bold underline">
+                           Read more on GreenPeace
+                         </a>
+                    </div>                                   
                 </div>
             </section>
         </main>
-        <footer>
+        <!--JS for alerts-->
+        <script>
+            function showAlerts(alerts) {
+            // Hide the no alerts message
+            document.getElementById('noAlertsMessage').style.display = 'none';
 
-        </footer>
+            // Array of all possible alert types
+            const alertTypes = ['red', 'orange', 'yellow'];
+
+            // Loop through each alert type and update the display based on the alerts parameter
+            alertTypes.forEach(type => {
+                const container = document.getElementById(`alert${type === 'red' ? '1' : type === 'orange' ? '2' : '3'}Container`);
+                const messageElem = document.getElementById(`alert${type === 'red' ? '1' : type === 'orange' ? '2' : '3'}Message`);
+                
+                if (alerts[type]) {
+                    container.style.display = 'flex';
+                    messageElem.textContent = alerts[type] || 'Insert alert message here';
+                } else {
+                    container.style.display = 'none';
+                }
+            });
+
+            // Show "No alerts" message if no alerts are passed
+            if (Object.keys(alerts).length === 0) {
+                document.getElementById('noAlertsMessage').style.display = 'block';
+                }
+            }
+        
+        showAlerts({
+            red: 'Prepare for water shedding',
+            orange: 'No alert',
+            yellow: 'No alert'
+            }); 
+        </script>
     </body>
 </html>
